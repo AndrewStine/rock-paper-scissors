@@ -11,63 +11,87 @@
 </body>
 
 <script>
-
-//define user and computer score as 0
 let userScore = 0;
 let computerScore = 0;
 
-//function for computer to randomly generate rock, paper, or scissor
-function computerPlay() {
-    let choices = ["Rock", "Paper", "Scissor"];
-    return computerChoice = choices[Math.floor(Math.random()*choices.length)];
-}
-
-//function that prompts user to choose rock, paper, or scissor; user clicks okay
-
-//playerPrompt = prompt("Let's play a game! Enter Rock, Paper, or Scissor.");
-
-//Capitilize first letter, lowercase rest
-//let playerPromptRev = playerPrompt.slice(0, 1).toUpperCase() + playerPrompt.slice(1).toLowerCase();
-//console.log("You selected " + playerPromptRev);
-
 //function playRound: compare playerSelection and computerSelection
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection === "Paper" && computerSelection === "Paper") {
+                result = "You both played Paper, TIE! You have " + userScore + " points, Computer has " + computerScore + " points."; 
+            } else if (playerSelection === "Rock" && computerSelection === "Rock") {
+                result = "You both played Rock, TIE! You have " + userScore + " points, Computer has " + computerScore + " points.";
+            } else if (playerSelection === "Scissor" && computerSelection === "Scissor") {
+                result = "You both played Scissor, TIE! You have " + userScore + " points, Computer has " + computerScore + " points.";
+            } else if (playerSelection === "Rock" && computerSelection === "Paper") {
+                computerScore++;
+                result = "You lose! Paper beats rock. You have " + userScore + " points, Computer has " + computerScore + " points.";
+            } else if (playerSelection === "Paper" && computerSelection === "Scissor") {
+                computerScore++;
+                result = "You lose! Scissor beats paper. You have " + userScore + " points, Computer has " + computerScore + " points.";  
+            } else if (playerSelection === "Scissor" && computerSelection === "Rock") {
+                computerScore++;
+                result = "You lose! Rock beats scissor. You have " + userScore + " points, Computer has " + computerScore + " points.";
+            } else if (playerSelection === "Rock" && computerSelection === "Scissor") {
+                userScore++;
+                result = "Rock beats scissor, you WIN! You have " + userScore + " points, Computer has " + computerScore + " points.";
+            } else if (playerSelection === "Paper" && computerSelection === "Rock") {
+                userScore++;
+                result = "Paper beats rock, you WIN! You have " + userScore + " points, Computer has " + computerScore + " points.";
+            } else if (playerSelection === "Scissor" && computerSelection === "Paper") {
+                userScore++;
+                result = "Scissor beats paper, you WIN! You have " + userScore + " points, Computer has " + computerScore + " points.";
+            } else 
+                result = "Something went wrong, check spelling and play again."; {
+            } return result;
+        }
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === "Paper" && computerSelection === "Paper") {
-        result = "You both played Paper, TIE!"; 
-    } else if (playerSelection === "Rock" && computerSelection === "Rock") {
-        result = "You both played Rock, TIE!";
-    } else if (playerSelection === "Scissor" && computerSelection === "Scissor") {
-        result = "You both played Scissor, TIE!";
-    } else if (playerSelection === "Rock" && computerSelection === "Paper") {
-        result = "You lose! Paper beats rock.";
-    } else if (playerSelection === "Paper" && computerSelection === "Scissor") {
-        result = "You lose! Scissor beats paper.";
-    } else if (playerSelection === "Scissor" && computerSelection === "Rock") {
-        result = "You lose! Rock beats scissor.";
-    } else if (playerSelection === "Rock" && computerSelection === "Scissor") {
-        result = "Rock beats scissor, you WIN!";
-    } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-        result = "Paper beats rock, you WIN!";
-    } else if (playerSelection === "Scissor" && computerSelection === "Paper") {
-        result = "Scissor beats paper, you WIN!";
-    } else 
-        result = "Something went wrong, check spelling and play again."; {
-    } return result;
+function game() {
+    
+    for (let i=1; i <= 5; i++) {
+
+        //Prompt user for answer, capitilize first letter, lowercase the rest
+        let playerPrompt = prompt("Let's play a game! Enter Rock, Paper, or Scissor.");
+        let playerSelection = playerPrompt.slice(0, 1).toUpperCase() + playerPrompt.slice(1).toLowerCase();
+
+        //function for computer to randomly generate rock, paper, or scissor
+        function computerPlay() {
+            let choices = ["Rock", "Paper", "Scissor"];
+            return computerChoice = choices[Math.floor(Math.random()*choices.length)];
+        } 
+
+        //computerSelection calls random function
+        let computerSelection = computerPlay();
+
+        
+
+        console.log(playRound(playerSelection, computerSelection));
+    }
+    
+    //Alert final score after 5 games
+    if (userScore > computerScore) {
+        alert("You win " + userScore + " to " + computerScore);
+    } else if (computerScore > userScore) {
+        alert("You lost " + computerScore + " to " + userScore);
+    } else {
+        alert("You tied" + computerScore + " to " + userScore);
+    }
 }
 
-const playerSelection = "Scissor";
-const computerSelection = computerPlay();
+console.log(game());
 
-console.log(playRound(playerSelection, computerSelection));
+//game function where playGame is called 5 times
+//function game() {
 
-//if user choice = rock && computer = scissor, user earns point
-//else if user choice = rock && computer = paper, computer earns point
-//else if user choice = paper && comp = rock, user earns point
-//else if user choice = paper && comp = scissor, comp earns point
-//else if user choice = scissor && comp = paper, user earns point
-//else if user choice = scissor && comp = rock, comp earns point
-//else user entered something other than rock, paper, or scissor, "Please enter again"
+   // playRound(playerSelection, computerSelection);
+      //  console.log(result + " After game 2, you have " + userScore + " and the //computer has " + computerScore)    
+   // playRound(playerSelection, computerSelection);
+      //  console.log(result + " After game 3, you have " + userScore + " and the computer has " + computerScore)
+   // playRound(playerSelection, computerSelection);
+      //  console.log(result + " After game 4, you have " + userScore + " and the computer has " + computerScore)
+   // playRound(playerSelection, computerSelection);
+      //  console.log(result + " After game 5, you have " + userScore + " and the computer has " + computerScore)
+
+
 
 //while user score < 5 && computer score < 5 keep playing
 //else if user score = 5, game over you win
